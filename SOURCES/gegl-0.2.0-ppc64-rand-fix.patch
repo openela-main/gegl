@@ -1,0 +1,11 @@
+diff -uNrp old/operations/common/matting-global.c new/operations/common/matting-global.c
+--- old/operations/common/matting-global.c	2012-04-02 23:15:26.000000000 +0200
++++ new/operations/common/matting-global.c	2016-12-04 11:10:25.255103750 +0100
+@@ -19,6 +19,7 @@
+ #include "config.h"
+ #include <glib/gi18n-lib.h>
+ #include <math.h>
++#include <stdlib.h>
+ 
+ #ifdef GEGL_CHANT_PROPERTIES
+ 

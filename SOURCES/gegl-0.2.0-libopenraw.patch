@@ -1,0 +1,71 @@
+diff -up gegl-0.2.0/configure.ac.libopenraw gegl-0.2.0/configure.ac
+--- gegl-0.2.0/configure.ac.libopenraw	2016-12-03 08:11:31.968387802 +0100
++++ gegl-0.2.0/configure.ac	2016-12-03 08:12:19.398987931 +0100
+@@ -790,7 +790,7 @@ AC_ARG_WITH(libopenraw, [  --without-lib
+ 
+ have_libopenraw="no"
+ if test "x$with_libopenraw" != "xno"; then
+-  PKG_CHECK_MODULES(OPENRAW, libopenraw-1.0 >= openraw_required_version,
++  PKG_CHECK_MODULES(OPENRAW, libopenraw-0.1 >= openraw_required_version,
+     have_libopenraw="yes",
+     have_libopenraw="no  (openraw library not found)")
+ fi
+diff -up gegl-0.2.0/configure.libopenraw gegl-0.2.0/configure
+--- gegl-0.2.0/configure.libopenraw	2016-12-03 08:11:33.954412931 +0100
++++ gegl-0.2.0/configure	2016-12-03 08:12:15.506938686 +0100
+@@ -20760,12 +20760,12 @@ if test -n "$OPENRAW_CFLAGS"; then
+     pkg_cv_OPENRAW_CFLAGS="$OPENRAW_CFLAGS"
+  elif test -n "$PKG_CONFIG"; then
+     if test -n "$PKG_CONFIG" && \
+-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libopenraw-1.0 >= 0.0.5\""; } >&5
+-  ($PKG_CONFIG --exists --print-errors "libopenraw-1.0 >= 0.0.5") 2>&5
++    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libopenraw-0.1 >= 0.0.5\""; } >&5
++  ($PKG_CONFIG --exists --print-errors "libopenraw-0.1 >= 0.0.5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+-  pkg_cv_OPENRAW_CFLAGS=`$PKG_CONFIG --cflags "libopenraw-1.0 >= 0.0.5" 2>/dev/null`
++  pkg_cv_OPENRAW_CFLAGS=`$PKG_CONFIG --cflags "libopenraw-0.1 >= 0.0.5" 2>/dev/null`
+ 		      test "x$?" != "x0" && pkg_failed=yes
+ else
+   pkg_failed=yes
+@@ -20777,12 +20777,12 @@ if test -n "$OPENRAW_LIBS"; then
+     pkg_cv_OPENRAW_LIBS="$OPENRAW_LIBS"
+  elif test -n "$PKG_CONFIG"; then
+     if test -n "$PKG_CONFIG" && \
+-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libopenraw-1.0 >= 0.0.5\""; } >&5
+-  ($PKG_CONFIG --exists --print-errors "libopenraw-1.0 >= 0.0.5") 2>&5
++    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libopenraw-0.1 >= 0.0.5\""; } >&5
++  ($PKG_CONFIG --exists --print-errors "libopenraw-0.1 >= 0.0.5") 2>&5
+   ac_status=$?
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+-  pkg_cv_OPENRAW_LIBS=`$PKG_CONFIG --libs "libopenraw-1.0 >= 0.0.5" 2>/dev/null`
++  pkg_cv_OPENRAW_LIBS=`$PKG_CONFIG --libs "libopenraw-0.1 >= 0.0.5" 2>/dev/null`
+ 		      test "x$?" != "x0" && pkg_failed=yes
+ else
+   pkg_failed=yes
+@@ -20803,9 +20803,9 @@ else
+         _pkg_short_errors_supported=no
+ fi
+         if test $_pkg_short_errors_supported = yes; then
+-	        OPENRAW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libopenraw-1.0 >= 0.0.5" 2>&1`
++	        OPENRAW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libopenraw-0.1 >= 0.0.5" 2>&1`
+         else
+-	        OPENRAW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libopenraw-1.0 >= 0.0.5" 2>&1`
++	        OPENRAW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libopenraw-0.1 >= 0.0.5" 2>&1`
+         fi
+ 	# Put the nasty error message in config.log where it belongs
+ 	echo "$OPENRAW_PKG_ERRORS" >&5
+diff -up gegl-0.2.0/operations/external/openraw.c.libopenraw gegl-0.2.0/operations/external/openraw.c
+--- gegl-0.2.0/operations/external/openraw.c.libopenraw	2016-12-03 08:28:14.284333843 +0100
++++ gegl-0.2.0/operations/external/openraw.c	2016-12-03 08:29:01.495751180 +0100
+@@ -116,7 +116,7 @@ load_buffer (GeglOperation *operation)
+       goto clean_file;
+     }
+ 
+-  if(or_rawdata_format (rawdata) != OR_DATA_TYPE_CFA)
++  if(or_rawdata_format (rawdata) != OR_DATA_TYPE_RAW)
+     {
+       goto clean_file;
+     }
